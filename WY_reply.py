@@ -22,8 +22,8 @@ def class_urls():
     return channel_dict
 
 
-def next_urls(res):
-    res = res.text
+def next_urls(url):
+    res = requests.get(url).text
     urls = re.findall('http://(.{2,9}).163.com/(..)/(....)/(..)/(.*?).html', res)
     next_urls = [ 'http://'+item[0]+'.163.com'+'/'+'/'.join(item[1:])+'.html' for item in urls]
     return next_urls
@@ -91,7 +91,7 @@ def ListCombiner(contents):
             span = a.span()
             content = content.replace(content_[span[0]:span[1]], '')
         content = content+'\n'
-        s = s+ content
+        s = s + content
     return s
 
 

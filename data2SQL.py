@@ -1,5 +1,4 @@
 import MySQLdb
-import time as tt
 # con = MySQLdb.connect(host='localhost', user='root', db='wy', passwd='123321', port=3306, charset='utf8')
 # cur = con.cursor() # 创建游标对象，用来执行sql语句，获取数据；
 # cur.execute('create table person (id int, name varchar(5), age int)') # 创建表
@@ -21,7 +20,7 @@ def value_or_null(d, key):
 
 def data2mysql(content_item, comment_items):
     # content_item
-    source= content_item['source']
+    source = content_item['source']
     docId = content_item['content']['docid']
     category = content_item['content']['category']
     title = str(content_item['content']['title'])
@@ -33,7 +32,9 @@ def data2mysql(content_item, comment_items):
     comment_link = content_item['comment']['link']
     comment_list = str(content_item['comment']['comment_list'])
 #time.strptime('2018-03-09 01:18:57','%Y-%m-%d %H:%M:%S')
-    con = MySQLdb.connect(host='localhost', user='root', db='wy', passwd='123321', port=3306, charset='utf8mb4')
+    con = MySQLdb.connect(
+        host='localhost', user='root', db='wy',
+        passwd='123321', port=3306, charset='utf8mb4')
     cur = con.cursor()  # 创建游标对象，用来执行sql语句，获取数据；
     # cur.execute('create table content '
     #             '('

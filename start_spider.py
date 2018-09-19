@@ -8,7 +8,7 @@ def build_spyder():
     temp_docIds = docIds_from_mysql()
     cla_urls = class_urls()
     for (_, url) in cla_urls.items():
-        urls = next_urls(requests.get(url))
+        urls = next_urls(url)
         for url in urls:
             doc_id = url.split('/')[-1].replace('.html', '')
             if doc_id not in temp_docIds:
@@ -23,6 +23,3 @@ def build_spyder():
 
 if __name__ == '__main__':
     build_spyder()
-
-
-
