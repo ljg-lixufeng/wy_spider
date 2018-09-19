@@ -2,59 +2,54 @@ import threading
 import queue
 from data2SQL import docIds_from_mysql
 from WY_reply import next_urls
+from WY_reply import parse_news
+from data2SQL import data2mysql
+import requests
+
+class spyder():
+    def __init__(self):
+        self.url_dateset = docIds_from_mysql()
+        self.url_q = queue.Queue()
+        self.count = 0
+
+    def urls_in(self, url):
+        # 1.得到url
+        urls = next_urls(url)
+        urls_docid = [url.split('/')[-1].replace('.html', '') for url in urls]
+        # 2.过滤并升级set
+        urls_waiting = set([url for url in urls if url.split('/')[-1].replace('.html', '') not in self.url_dateset])
+        self.url_dateset.update(urls_docid)
+        # 入队操作
+        c = 0
+        for url in urls_waiting:
+            self.url_q.put(url)
+            c += 1
+            self.count += 1
+        if self.count % 100 == 0:
+            print('本次入队{}次，当前队列总数{}个, 解析到url个数{}，待入队个数{}，set个数{}，入队总个数{}'.format(
+                c, self.url_q.qsize(), len(urls), len(urls_waiting), len(self.url_dateset), self.count))
 
 
-def test():
-    url_q = queue.Queue(maxsize=2)
-
-    def url_in(url):
-        url_q.put(url)
-
-    def url_out():
-        while True:
-            url = url_q.get()
-            if url == 4:
-                break
-            print(url_q.qsize())
-            print('出对操作', url)
-
-    enq = threading.Thread(
-        target=url_in, args=[4]
-    )
-
-    deq = threading.Thread(
-        target=url_out
-    )
-
-    enq.start()
-    deq.start()
+spy = spyder()
 
 
-def url_manager(url, function):
-    return function(url)
-
-def urls_(url, url_q):
-    # 1.得到url
-    urls = next_urls(url)
-    url_set = docIds_from_mysql()
-    urls_waiting = [url for url in urls if url not in url_set]
-    url_set.update(urls)
-
-    def enq(urls):
-        for url in urls:
-            url_q.put(url)
-
-    url_in = threading.Thread(target=enq, args=[urls])
-    url_in.start()
-    #url_out = threading.Thread(target=deq)
-
-def main():
-    url_q = queue.Queue()
-    url = "url"
-    def deq():
-        return url_q.get()
-
+def url_out():
+    url = "https://news.163.com"
+    c = 0
     while True:
-        urls_(url, url_q)
-        url_out = threading.Thread(target=deq)
-        url = url_out
+        enq = threading.Thread(target=spy.urls_in, args=[url])
+        enq.start()
+        url = spy.url_q.get()
+        if requests.get(url).status_code == 404:
+            continue
+        # 解析并保存
+        response = requests.get(url)
+        content_item, comment_items = next(
+            parse_news(response=response)
+        )
+        data2mysql(content_item, comment_items)
+        print('processing')
+        c += 1
+        if c % 100 == 0:
+            print("出对总{}次，url：{}".format(c, url))
+url_out()

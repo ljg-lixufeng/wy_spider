@@ -100,39 +100,41 @@ def parse_news(response):
     item = dict()
     url = response.url
     selector = Selector(response)
-    newsId, productKey, comment_url = doc_info(response)
+    newsId, productKey, comment_url, creat_time = doc_info(response)
     comment_list, comments = comment_call_back(productKey, newsId)
 
     item['source'] = 'netease'
     item['comment'] \
         = {'link': comment_url, 'comment_list':comment_list}
-    item['content'] \
-        = {'link': str(url), 'title': u'', 'docid': newsId, 'productKey':productKey, 'category': u'', 'time': u'', 'passage': u''}
-    item['content']['title'] \
-        = selector.xpath('//*[@id="epContentLeft"]/h1/text()').extract()
-    item['content']['category'] \
-        = '_'.join(selector.xpath("//div[@class='post_crumb']/a/text()").extract())
-    try:
-        item['content']['time'] \
-            = selector.xpath("//div[@class='post_time_source']/text()").extract()[0].strip()[0:-7]
-    except IndexError:
-        item['content']['time'] \
-            = selector.xpath("//div[@class='ep-time-soure cDGray']/text()").extract()[0].strip()[0:-7]
-
+    item['content'] = {'link': str(url), 'title': u'', 'docid': newsId,
+                       'productKey': productKey, 'category': u'',
+                       'time': u'', 'passage': u''}
+    item['content']['title'] = selector.xpath(
+        '//*[@id="epContentLeft"]/h1/text()').extract()
+    item['content']['category'] = '_'.join(
+        selector.xpath("//div[@class='post_crumb']/a/text()").extract())
+    item['content']['time'] = creat_time
     item['content']['passage'] \
         = ListCombiner(selector.xpath('//*[@id="endText"]/p/text()').extract())
     yield item, comments
 
 
-def doc_info( response):
+def doc_info(response):
 
     url = response.url
     newsId = url.split('/')[-1].replace('.html', '')
+
     productKey = re.findall(re.compile(r'"productKey" : "(\w+)"'), response.text)[0]
+
     comments_api = 'http://comment.news.163.com/api/v1/products/' + productKey + '/threads/' + newsId
     boardId = re.findall(r'"boardId":"(\w+)"', str(urlopen(comments_api).read()))[0]
-    comments_url = ('http://comment.'+ url.split('/')[2] + '/' + boardId + '/' + newsId + '.html')
-    return newsId, productKey, comments_url
+    false = False
+    true = True
+    info = eval(urlopen(comments_api).read())
+    comments_url = 'http://comment.'+ url.split('/')[2] + '/' + info['boardId'] + '/' + newsId + '.html'
+    creat_time = info['createTime']
+    # comments_url = ('http://comment.'+ url.split('/')[2] + '/' + boardId + '/' + newsId + '.html')
+    return newsId, productKey, comments_url, creat_time
 
 
 def build_spyder():
