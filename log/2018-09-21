@@ -1,0 +1,62 @@
+[2018-09-21 09:12:42,049] WY_spyder: INFO: {'体育频道': 1580, '网易娱乐': 2196, '新闻中心': 936, '女人频道': 34, '艺术频道': 3, '汽车频道': 758, '双创频道': 2, '健康频道': 81, '网易科技': 798, '网易手机': 778, '数码频道': 209, '财经频道': 6413, '网易家居': 395, '教育频道': 2, '军事': 23, '旅游频道': 101, '网易广州房产': 291, '态度营销': 3}
+[2018-09-21 09:23:12,044] WY_spyder: INFO: {'体育频道': 1580, '网易娱乐': 2196, '新闻中心': 936, '女人频道': 34, '艺术频道': 3, '汽车频道': 758, '双创频道': 2, '健康频道': 81, '网易科技': 798, '网易手机': 778, '数码频道': 209, '财经频道': 6413, '网易家居': 395, '教育频道': 2, '军事': 23, '旅游频道': 101, '网易广州房产': 291, '态度营销': 3}
+[2018-09-21 09:28:53,599] WY_spyder: INFO: {'体育频道': 1580, '网易娱乐': 2196, '新闻中心': 936, '女人频道': 34, '艺术频道': 3, '汽车频道': 758, '双创频道': 2, '健康频道': 81, '网易科技': 798, '网易手机': 778, '数码频道': 209, '财经频道': 6413, '网易家居': 395, '教育频道': 2, '军事': 23, '旅游频道': 101, '网易广州房产': 291, '态度营销': 3}
+[2018-09-21 09:28:56,023] WY_spyder: INFO: out message: 出队第0次，跟帖：92个，url：http://auto.163.com/18/0918/00/DRUOM2UM0008856R.html
+[2018-09-21 09:29:09,162] WY_spyder: INFO: In message: 本次入队4次，当前队列总数86个, 解析到url个数44，待入队个数4，set个数16311，入队总个数100
+[2018-09-21 09:29:16,152] WY_spyder: INFO: out message: 出队第2次，跟帖：54个，url：http://auto.163.com/18/0914/00/DRKFLJQO0008856R.html
+[2018-09-21 09:29:22,767] WY_spyder: INFO: out message: 出队第4次，跟帖：88个，url：http://auto.163.com/18/0916/09/DRQJST4I000884MM.html
+[2018-09-21 09:29:42,462] WY_spyder: INFO: out message: 出队第6次，跟帖：56个，url：http://auto.163.com/18/0921/06/DS750DSA0008856V.html
+[2018-09-21 09:29:48,642] WY_spyder: INFO: out message: 出队第8次，跟帖：78个，url：http://auto.163.com/18/0920/20/DS632I5U0008856R.html
+[2018-09-21 09:29:58,913] WY_spyder: INFO: out message: 出队第10次，跟帖：111个，url：http://auto.163.com/18/0917/07/DRSVRAPB0008856V.html
+[2018-09-21 09:30:05,500] WY_spyder: INFO: out message: 出队第12次，跟帖：72个，url：http://auto.163.com/18/0921/06/DS74QU580008856V.html
+[2018-09-21 09:30:07,943] WY_spyder: INFO: out message: 出队第14次，跟帖：42个，url：http://auto.163.com/18/0917/09/DRT7BCR0000884MM.html
+[2018-09-21 09:30:11,350] WY_spyder: INFO: out message: 出队第16次，跟帖：30个，url：http://auto.163.com/18/0921/00/DS6FS8RP0008856R.html
+[2018-09-21 09:30:59,659] WY_spyder: INFO: out message: 出队第18次，跟帖：162个，url：http://auto.163.com/18/0918/10/DRVRLB7T0008856R.html
+[2018-09-21 09:31:01,121] WY_spyder: INFO: In message: 本次入队1次，当前队列总数196个, 解析到url个数10，待入队个数1，set个数16511，入队总个数300
+[2018-09-21 09:31:01,824] WY_spyder: INFO: In message: 本次入队0次，当前队列总数195个, 解析到url个数0，待入队个数0，set个数16511，入队总个数300
+[2018-09-21 09:31:01,950] WY_spyder: INFO: parse error, url:http://auto.163.com/18/0913/08/DRIPLF7Q000884ML.html
+[2018-09-21 09:31:12,888] WY_spyder: INFO: out message: 出队第20次，跟帖：96个，url：http://auto.163.com/18/0706/07/DM11Q3TG0008856S.html
+[2018-09-21 09:31:33,445] WY_spyder: INFO: parse error, url:http://auto.163.com/18/0913/07/DRIMAGGC0008856V_3.html
+[2018-09-21 09:31:34,221] WY_spyder: INFO: parse error, url:http://auto.163.com/18/0913/07/DRIMAGGC0008856V_2.html
+[2018-09-21 09:31:37,522] WY_spyder: INFO: out message: 出队第22次，跟帖：332个，url：http://auto.163.com/18/0530/00/DJ11R37Q0008856V.html
+[2018-09-21 09:31:41,455] WY_spyder: INFO: out message: 出队第24次，跟帖：56个，url：http://auto.163.com/18/0913/07/DRIM3QDL0008856V.html
+[2018-09-21 09:31:41,956] WY_spyder: INFO: parse error, url:http://auto.163.com/18/0913/07/DRIMAGGC0008856V_all.html
+[2018-09-21 09:31:45,503] WY_spyder: INFO: out message: 出队第26次，跟帖：82个，url：http://auto.163.com/18/0324/09/DDLE8U8H000884MM.html
+[2018-09-21 09:32:01,920] WY_spyder: INFO: out message: 出队第28次，跟帖：123个，url：http://auto.163.com/18/0914/07/DRL942460008856V.html
+[2018-09-21 09:32:21,528] WY_spyder: INFO: out message: 出队第30次，跟帖：188个，url：http://auto.163.com/18/0810/10/DORFQU440008856S.html
+[2018-09-21 09:32:24,076] WY_spyder: INFO: out message: 出队第32次，跟帖：30个，url：http://auto.163.com/18/0810/09/DORCPDQ10008856R.html
+[2018-09-21 09:32:45,152] WY_spyder: INFO: parse error, url:http://auto.163.com/18/0921/06/DS74QU580008856V_all.html
+[2018-09-21 09:32:45,616] WY_spyder: INFO: parse error, url:http://auto.163.com/18/0921/06/DS74QU580008856V_3.html
+[2018-09-21 09:32:47,641] WY_spyder: INFO: parse error, url:http://auto.163.com/18/0921/06/DS74QU580008856V_2.html
+[2018-09-21 09:32:58,360] WY_spyder: INFO: parse error, url:http://auto.163.com/18/0917/07/DRSVI3J70008856V_all.html
+[2018-09-21 09:32:58,895] WY_spyder: INFO: parse error, url:http://auto.163.com/18/0917/07/DRSVI3J70008856V_2.html
+[2018-09-21 09:33:02,704] WY_spyder: INFO: In message: 本次入队3次，当前队列总数289个, 解析到url个数12，待入队个数3，set个数16711，入队总个数500
+[2018-09-21 09:33:44,447] WY_spyder: INFO: out message: 出队第34次，跟帖：92个，url：http://auto.163.com/18/0905/07/DQU4NSE1000884ML.html
+[2018-09-21 09:34:08,748] WY_spyder: INFO: out message: 出队第36次，跟帖：351个，url：http://auto.163.com/18/0511/00/DHG2TA0Q0008856R.html
+[2018-09-21 09:34:47,220] WY_spyder: INFO: out message: 出队第38次，跟帖：125个，url：http://auto.163.com/18/0918/06/DRVF23CA000884MM.html
+[2018-09-21 09:34:58,693] WY_spyder: INFO: parse error, url:http://auto.163.com/18/0706/07/DM11Q3TG0008856S_all.html
+[2018-09-21 09:34:59,179] WY_spyder: INFO: parse error, url:http://auto.163.com/18/0706/07/DM11Q3TG0008856S_2.html
+[2018-09-21 09:34:59,657] WY_spyder: INFO: parse error, url:http://auto.163.com/18/0706/07/DM11Q3TG0008856S_3.html
+[2018-09-21 09:35:04,134] WY_spyder: INFO: parse error, url:http://auto.163.com/18/0827/08/DQ70VPSR0008856V_2.html
+[2018-09-21 09:35:07,970] WY_spyder: INFO: out message: 出队第40次，跟帖：282个，url：http://auto.163.com/18/0827/00/DQ63UBVT0008856R.html
+[2018-09-21 09:35:08,475] WY_spyder: INFO: parse error, url:http://auto.163.com/18/0827/08/DQ70VPSR0008856V_all.html
+[2018-09-21 09:35:19,226] WY_spyder: INFO: out message: 出队第42次，跟帖：172个，url：http://auto.163.com/18/0911/14/DRE8U9DF000887AJ.html
+[2018-09-21 09:35:36,846] WY_spyder: INFO: out message: 出队第44次，跟帖：165个，url：http://auto.163.com/18/0530/01/DJ1214T40008856V.html
+[2018-09-21 09:35:54,171] WY_spyder: INFO: out message: 出队第46次，跟帖：79个，url：http://auto.163.com/18/0603/09/DJC75FH0000884MM.html
+[2018-09-21 09:35:59,254] WY_spyder: INFO: parse error, url:http://auto.163.com/18/0921/06/DS76BCFR0008856V_3.html
+[2018-09-21 09:35:59,750] WY_spyder: INFO: parse error, url:http://auto.163.com/18/0921/06/DS76BCFR0008856V_all.html
+[2018-09-21 09:36:00,391] WY_spyder: INFO: parse error, url:http://auto.163.com/18/0921/06/DS76BCFR0008856V_2.html
+[2018-09-21 09:37:28,001] WY_spyder: INFO: {'体育频道': 1580, '网易娱乐': 2196, '新闻中心': 936, '女人频道': 34, '艺术频道': 3, '汽车频道': 806, '双创频道': 2, '健康频道': 81, '网易科技': 798, '网易手机': 778, '数码频道': 209, '财经频道': 6413, '网易家居': 395, '教育频道': 2, '军事': 23, '旅游频道': 101, '网易广州房产': 291, '态度营销': 3}
+[2018-09-21 09:39:31,040] WY_spyder: INFO: In message: 本次入队1次，当前队列总数173个, 解析到url个数10，待入队个数1，set个数16559，入队总个数300
+[2018-09-21 09:39:53,733] WY_spyder: INFO: parse error, url:http://auto.163.com/18/0913/08/DRIPLF7Q000884ML.html
+[2018-09-21 09:40:10,405] WY_spyder: INFO: out message: 出队第0次，跟帖：139个，url：http://auto.163.com/18/0410/07/DF10CSR6000884MM.html
+[2018-09-21 09:40:48,179] WY_spyder: INFO: out message: 出队第2次，跟帖：177个，url：http://auto.163.com/18/0917/00/DRS6BAOR0008856R.html
+[2018-09-21 09:41:15,542] WY_spyder: INFO: In message: 本次入队3次，当前队列总数274个, 解析到url个数44，待入队个数3，set个数16759，入队总个数500
+[2018-09-21 09:41:54,641] WY_spyder: INFO: In message: 本次入队1次，当前队列总数331个, 解析到url个数10，待入队个数1，set个数16859，入队总个数600
+[2018-09-21 09:43:18,907] WY_spyder: INFO: In message: 本次入队3次，当前队列总数429个, 解析到url个数12，待入队个数3，set个数17059，入队总个数800
+[2018-09-21 09:43:41,092] WY_spyder: INFO: out message: 出队第4次，跟帖：315个，url：http://auto.163.com/18/0803/17/DOA51MAA000884ML.html
+[2018-09-21 09:44:16,792] WY_spyder: INFO: In message: 本次入队4次，当前队列总数476个, 解析到url个数44，待入队个数4，set个数17159，入队总个数900
+[2018-09-21 09:46:44,390] WY_spyder: INFO: out message: 出队第6次，跟帖：5998个，url：http://auto.163.com/18/0625/17/DL5QCKOB000884NK.html
+[2018-09-21 09:47:23,920] WY_spyder: INFO: out message: 出队第8次，跟帖：999个，url：http://auto.163.com/17/0625/12/CNPBFV6N000887BT.html
+[2018-09-21 09:48:08,322] WY_spyder: INFO: out message: 出队第10次，跟帖：397个，url：http://auto.163.com/18/0903/10/DQP8FKRF0008856R.html
+[2018-09-21 09:49:51,996] WY_spyder: INFO: parse error, url:http://auto.163.com/18/0622/09/DKT5DDJP000884ML.html

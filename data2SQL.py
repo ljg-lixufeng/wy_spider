@@ -80,13 +80,23 @@ def data2mysql(content_item, comment_items):
     #             'user_vipInfo varchar(20),'
     #             'vote int'
     #             ')')
+
     cur.executemany('replace into comment (commentId, buildLevel, createTime, content, favCount, isDel, postId,'
                     'productKey, shareCount, against, siteName, source, user_avatar, user_incentiveInfoList, user_location,'
                     'user_nickname, user_redNameInfo, user_Id, user_vipInfo, vote) '
                     'values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) ',
-                    [(str(item['commentId']), item['buildLevel'], item['createTime'], item['content'], item['favCount'],
-                      item['isDel'], item['postId'], item['productKey'], item['shareCount'], item['against'],
-                      item['siteName'],item['source'],
+                    [(str(value_or_null(item,'commentId')),
+                      value_or_null(item,'buildLevel'),
+                      value_or_null(item,'createTime'),
+                      value_or_null(item,'content'),
+                      value_or_null(item,'favCount'),
+                      value_or_null(item,'isDel'),
+                      value_or_null(item,'postId'),
+                      value_or_null(item,'productKey'),
+                      value_or_null(item, 'shareCount'),
+                      value_or_null(item,'against'),
+                      value_or_null(item,'siteName'),
+                      value_or_null(item, 'source'),
                       value_or_null(item['user'], 'avatar'),
                       value_or_null(item['user'], 'incentiveInfoList'),
                       value_or_null(item['user'], 'location'),
@@ -94,19 +104,44 @@ def data2mysql(content_item, comment_items):
                       value_or_null(item['user'], 'redNameInfo'),
                       value_or_null(item['user'], 'userId'),
                       value_or_null(item['user'], 'vipInfo'),
-                      item['vote'])
-                     for item in comment_items.values()])
+                      item['vote']) for item in comment_items.values()])
+
     con.commit()
 
 
-def docIds_from_mysql():
+def statistics_from_mysql():
     con = MySQLdb.connect(
         host='localhost', user='root', 
         db='wy', passwd='123321', 
         port=3306, charset='utf8mb4')
     cur = con.cursor()  # 创建游标对象，用来执行sql语句，获取数据；
-    cur.execute('select docId from content c;')
-    docIds = {o[0] for o in cur.fetchall()}
+
+    # 统计类别数量
+    cur.execute('SELECT c.`category` FROM content c;')
+    categories = cur.fetchall()
+    category_dict = {}
+
+    # docids he urls
+    cur.execute('SELECT c.`content_link` FROM content c;')
+    dateset_urls_ = cur.fetchall()
+    dateset_urls = {url[0] for url in dateset_urls_}
+
+    cur.execute('SELECT c.`docId` FROM content c;')
+    docIds_ = cur.fetchall()
+    docIds = {id[0] for id in docIds_}
+
+    for c in categories:
+        splited_c = c[0].split('_')
+        if len(splited_c)<2:
+            key = splited_c[0]
+        elif len(splited_c)>=2:
+            key = splited_c[1]
+        if key not in category_dict.keys():
+            category_dict[key] = 1
+        else:
+            category_dict[key] = category_dict[key] + 1
+
     cur.close()
     con.close()
-    return docIds
+    category_dict.pop('')
+    return docIds, dateset_urls, category_dict

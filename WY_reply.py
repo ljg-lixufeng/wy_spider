@@ -6,21 +6,28 @@ from bs4 import BeautifulSoup
 from scrapy.selector import Selector
 
 
-def class_urls():
-    url = 'https://news.163.com/'
-    res = requests.get(url).text
-    soup = BeautifulSoup(res, 'html.parser')
-    r = soup.find('div','newsdata_nav','clearfix',)
-    r1 = re.findall('<a href="(.*?)" ne-role="tab-nav">(..)</a>', str(r))
-    r2 = re.findall('<a class="nav_name" href="(.*?)" ne-role="tab-nav">\n(.*)\n', str(r))
-    channel_dict = {}
-    for lis in [r1, r2]:
-        for item in lis:
-            channel_dict[item[1].strip()]=item[0]
-    channel_dict.pop('房产')
-    channel_dict.pop('健康')
-    return channel_dict
 
+def class_urls():
+    urlstr=r'<a href="http://sports.163.com/">体育</a>' \
+        r'<a href="http://sports.163.com/nba/">NBA</a>' \
+        r'<a href="http://ent.163.com/">娱乐</a>' \
+        r'<a href="http://money.163.com/">财经</a>' \
+        r'<a href="http://money.163.com/stock/">股票</a>' \
+        r'<a href="http://auto.163.com/">汽车</a>' \
+        r'<a href="http://tech.163.com/">科技</a>' \
+        r'<a href="http://mobile.163.com/">手机</a>' \
+        r'<a href="http://digi.163.com/">数码</a>' \
+        r'<a href="http://lady.163.com/">女人</a>' \
+        r'<a href="http://travel.163.com/">旅游</a>' \
+        r'<a href="http://house.163.com/">房产</a>' \
+        r'<a href="http://home.163.com/">家居</a>' \
+        r'<a href="http://edu.163.com/">教育</a>' \
+        r'<a href="http://book.163.com/">读书</a>' \
+        r'<a href="http://jiankang.163.com/">健康</a>' \
+        r'<a href="http://art.163.com/">艺术</a>'
+    r1 = re.findall('<a href="(.*?)">(.{2,3}?)</a>', urlstr)
+    # return list(truple)
+    return r1
 
 def next_urls(url):
     res = requests.get(url).text
@@ -78,7 +85,6 @@ def comment_call_back(productKey, docId):
                 for it in comment_back['comments'].items():
                     if it[0] not in comments_dict.keys() :
                         comments_dict[it[0]] = it[1]
-
     return comment_ids, comments_dict
 
 
@@ -100,7 +106,7 @@ def parse_news(response):
     item = dict()
     url = response.url
     selector = Selector(response)
-    newsId, productKey, comment_url, creat_time = doc_info(response)
+    newsId, productKey, comment_url, creat_time, tcount = doc_info(response)
     comment_list, comments = comment_call_back(productKey, newsId)
 
     item['source'] = 'netease'
@@ -116,7 +122,7 @@ def parse_news(response):
     item['content']['time'] = creat_time
     item['content']['passage'] \
         = ListCombiner(selector.xpath('//*[@id="endText"]/p/text()').extract())
-    yield item, comments
+    yield item, comments, tcount
 
 
 def doc_info(response):
@@ -133,8 +139,9 @@ def doc_info(response):
     info = eval(urlopen(comments_api).read())
     comments_url = 'http://comment.'+ url.split('/')[2] + '/' + info['boardId'] + '/' + newsId + '.html'
     creat_time = info['createTime']
+    tcount = info['tcount']
     # comments_url = ('http://comment.'+ url.split('/')[2] + '/' + boardId + '/' + newsId + '.html')
-    return newsId, productKey, comments_url, creat_time
+    return newsId, productKey, comments_url, creat_time, tcount
 
 
 def build_spyder():
