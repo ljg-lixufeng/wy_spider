@@ -68,10 +68,21 @@ class spyder():
             if min_value == v:
                 return k
 
+    def Monitor_queue_size(self, category):
+        while True:
+            if self.url_q.qsize() == 0:
+                print('moniter enq')
+                for url in self.url_dateset:
+                    if category in url:
+                        self.url_q.put(url)
 
-def url_out(father_url):
+
+
+def url_out(father_url, category):
     enq0 = threading.Thread(target=wy.urls_in, args=[father_url])
     enq0.start()
+    Monitor = threading.Thread(target=wy.Monitor_queue_size, args=[category])
+    Monitor.start()
     while wy.out_count%1000 != 0:
         url = wy.url_q.get()
         # 保证所爬url属于输入url的类别,http://sports.163.com
@@ -130,4 +141,4 @@ if __name__ == '__main__':
         print("father category {}".format(father_category))
         father_url = father_urls[father_category]
         print('father category:%s '%(father_url[0]))
-        url_out(father_url[0])
+        url_out(father_url[0], father_category)
