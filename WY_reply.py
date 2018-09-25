@@ -7,7 +7,7 @@ from scrapy.selector import Selector
 
 
 
-def class_urls():
+def father_urls():
     urlstr=r'<a href="http://sports.163.com/">体育</a>' \
         r'<a href="http://sports.163.com/nba/">NBA</a>' \
         r'<a href="http://ent.163.com/">娱乐</a>' \
@@ -26,8 +26,8 @@ def class_urls():
         r'<a href="http://jiankang.163.com/">健康</a>' \
         r'<a href="http://art.163.com/">艺术</a>'
     r1 = re.findall('<a href="(.*?)">(.{2,3}?)</a>', urlstr)
-    # return list(truple)
-    return r1
+    father_urls = {url[0].split('/')[2].split('.')[0]: url for url in r1}
+    return father_urls
 
 def next_urls(url):
     res = requests.get(url).text
