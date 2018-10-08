@@ -8,6 +8,7 @@ import requests
 from log_func import my_log
 from WY_reply import father_urls
 import random
+import time
 
 class spyder():
     def __init__(self):
@@ -44,12 +45,12 @@ class spyder():
             c += 1
             self.in_count += 1
         # 如果队列大小为0，从dataset中随机挑一个给队列
-        if self.url_q.qsize() == 0:
-            print('qsize == 0 ，get random url from urls')
-            rand = random.randint(0, len(urls))
-            self.url_q.put(urls[rand])
-            c += 1
-            self.in_count += 1
+        # if self.url_q.qsize() == 0:
+        #     print('qsize == 0 ，get random url from urls')
+        #     rand = random.randint(0, len(urls)-1)
+        #     self.url_q.put(urls[rand])
+        #     c += 1
+        #     self.in_count += 1
         
         if self.in_count % 100 == 0:
             self.log.info(
@@ -61,38 +62,43 @@ class spyder():
 
     def father_category(self):
         self.category_count.pop('2018')
+        self.category_count.pop('2016')
         self.category_count.pop('hea')
         self.category_count.pop('data')
+        self.category_count.pop('news')
+        self.category_count.pop('travel')
+        self.category_count.pop('gz')
         min_value = min(self.category_count.values())
         for k,v in self.category_count.items():
             if min_value == v:
                 return k
 
     def Monitor_queue_size(self, category):
+        urls = [url for url in self.url_dateset ] #if category in url]
         while True:
             if self.url_q.qsize() == 0:
                 print('moniter enq')
-                for url in self.url_dateset:
-                    if category in url:
-                        self.url_q.put(url)
+                self.url_q.put(urls[random.randint(1, len(urls)-1)])
 
 
 
 def url_out(father_url, category):
     enq0 = threading.Thread(target=wy.urls_in, args=[father_url])
     enq0.start()
+    time.sleep(10)
+    print('sleep 10')
     Monitor = threading.Thread(target=wy.Monitor_queue_size, args=[category])
     Monitor.start()
     while wy.out_count%1000 != 0:
         url = wy.url_q.get()
         # 保证所爬url属于输入url的类别,http://sports.163.com
-        if father_url.split('/')[2].split('.')[0] != \
-                url.split('/')[2].split('.')[0]:
-            if wy.url_q.qsize() == 0:
-                enq = threading.Thread(target=wy.urls_in, args=[url])
-                enq.start()
-            continue
-        # 页面是404
+        # if father_url.split('/')[2].split('.')[0] != \
+        #         url.split('/')[2].split('.')[0]:
+        #     if wy.url_q.qsize() == 0:
+        #         enq = threading.Thread(target=wy.urls_in, args=[url])
+        #         enq.start()
+        #     continue
+        # # 页面是404
         try:
             if requests.get(url).status_code == 404:
                 wy.log.info('404 error')
@@ -109,10 +115,11 @@ def url_out(father_url, category):
         except:
             wy.log.info('parse error, url:{}'.format(url))
             continue
-        # 跟帖小于30的，不保存
-        if tcount < 100:
+
+        # 跟帖层数小于20的，不保存
+        if tcount < 20:
             wy.log.info(
-                'tcount error: tcount:{} url: {}'.format(tcount,url))
+                'tlayer num error: tlayer num:{} url: {}'.format(tcount,url))
             continue
         # 入队操作
         enq = threading.Thread(target=wy.urls_in, args=[url])
@@ -123,12 +130,12 @@ def url_out(father_url, category):
         except:
             wy.log.info('dateset error, url:{}'.format(url))
             continue
-        if wy.out_count % 2 == 0:
+        if wy.out_count % 1 == 0:
             wy.log.info(
                 "out message: 出队第{}次，跟帖：{}个，url：{}".format(
                     wy.out_count,tcount,url))
-        wy.category_count[url.split('/')[2].split('.')[0]] = \
-            wy.category_count[url.split('/')[2].split('.')[0]] + 1
+        # wy.category_count[url.split('/')[2].split('.')[0]] = \
+        #     wy.category_count[url.split('/')[2].split('.')[0]] + 1
         wy.out_count += 1
 
 

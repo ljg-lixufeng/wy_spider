@@ -10,6 +10,7 @@ from scrapy.selector import Selector
 def father_urls():
     urlstr=r'<a href="http://sports.163.com/">体育</a>' \
         r'<a href="http://sports.163.com/nba/">NBA</a>' \
+        r'<a href="http://war.163.com/">军事</a>' \
         r'<a href="http://ent.163.com/">娱乐</a>' \
         r'<a href="http://money.163.com/">财经</a>' \
         r'<a href="http://money.163.com/stock/">股票</a>' \
@@ -109,6 +110,7 @@ def parse_news(response):
     newsId, productKey, comment_url, creat_time, tcount = doc_info(response)
     comment_list, comments = comment_call_back(productKey, newsId)
 
+    tlayer_num = len(comment_list)
     item['source'] = 'netease'
     item['comment'] \
         = {'link': comment_url, 'comment_list':comment_list}
@@ -122,7 +124,7 @@ def parse_news(response):
     item['content']['time'] = creat_time
     item['content']['passage'] \
         = ListCombiner(selector.xpath('//*[@id="endText"]/p/text()').extract())
-    yield item, comments, tcount
+    yield item, comments, tlayer_num
 
 
 def doc_info(response):
@@ -145,7 +147,7 @@ def doc_info(response):
 
 
 def build_spyder():
-    cla_urls = class_urls()
+    cla_urls = father_urls()
     for (_, url) in cla_urls.items():
         urls = next_urls(requests.get(url))
         for url in urls:
